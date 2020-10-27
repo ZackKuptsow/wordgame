@@ -41,6 +41,7 @@ function startTimer(e) {
             if (timer == 0) {
                 clearInterval(interval);
                 resolve();
+                window.location.href = `../score.html?gameid=${new URL(window.location.href).searchParams.get("gameid")}`;
             }
         }, 1000);
     })

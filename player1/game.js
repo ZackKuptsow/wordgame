@@ -33,7 +33,7 @@ function startTimer(e) {
     //     document.getElementById("box" + i).innerText = "X";
     // };
     let guessed = [];
-    let timer = 60;
+    let timer = 3;
     return new Promise((resolve, reject) => {
         let interval = setInterval(function() {
             timer--;
@@ -41,6 +41,7 @@ function startTimer(e) {
             if (timer == 0) {
                 clearInterval(interval);
                 resolve();
+                window.location.href = `../score.html?gameid=${new URL(window.location.href).searchParams.get("gameid")}`;
             }
         }, 1000);
     })

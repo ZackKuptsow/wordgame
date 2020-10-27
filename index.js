@@ -115,7 +115,6 @@ $( "#genCode" ).click(function() {
 
         gamesDB.child(gameid).on("value", function(gameSnap) {
             existingGame = gameSnap.val();
-            console.log(existingGame);
             if (existingGame.players.player2 !== null) {
                 if ((existingGame.players.player1.ready == true) && (existingGame.players.player2.ready == true)) {
                     window.location.href = `player1/game.html?gameid=${gameid}`;
@@ -209,3 +208,4 @@ function genId() {
 }
 
 // TODO: if player hits reload in waiting room and gets taken back to lobby destroy game
+// TODO: reload during game doesn't reset clock
