@@ -64,6 +64,7 @@ function score(gameid, p) {
 let doneTheStuff;
 function whatever(gameid) {
     if (!doneTheStuff) {
+        doneTheStuff = true;
         wordExists(gameid, "player1");
         wordExists(gameid, "player2");
         score(gameid, "player1");
