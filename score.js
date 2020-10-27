@@ -75,7 +75,9 @@ function populate(gameid) {
     firebase.database().ref("games").child(gameid).once("value", gameSnap => {
         game = gameSnap.val();
         $("#score1").html(game.players.player1.score);
+        $("#words1").html(game.players.player1.words);
         $("#score2").html(game.players.player2.score);
+        $("#words2").html(game.players.player2.words);
     });
 }
 
