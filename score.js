@@ -10,26 +10,39 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-function wordExists(gameid, p) {
-    let thisGame = firebase.database().ref("games").child(gameid);
-    thisGame.once("value", gameSnap => {
-        let game = gameSnap.val();
+let url = new URL(window.location.href);
+let gameid = url.searchParams.get("gameid");
+
+let db = firebase.database().ref("games").child(gameid);
+db.once("value", gameSnap => {
+    game = gameSnap.val();
+
+    ["player1", "player2"].forEach((p) => {
+        // CHECK WORD LIST IF WORDS ARE IN ENGLISH DICTIONARY
         let guessed = game.players[p]["words"];
+        console.log(game);
         let correct = [];
         dictionary = firebase.database().ref("dictionary");
         dictionary.once("value", dSnap => {
             let dict = dSnap.val();
             for(let i = 0; i < guessed.length; i++) {
-                // console.log(`Checking ${guessed[i]}`);
                 if(Object.keys(dict).includes(guessed[i].toLowerCase())) {
                     correct.push(guessed[i]);
                 }
             };
+            // SCORING
+            let score = 0;
+            for(let i = 0; i < correct.length; i++) {
+                score += scoreWord(correct[i]);
+            }
+
+            // UPLOAD
             game.players[p]["words"] = correct;
-            thisGame.set(game);
+            game.players[p]["score"] = score;
+            db.child("players").set(game);
         });
-    });
-};
+    })
+})
 
 function scoreWord(word) {
     if (word.length > 8) {
@@ -46,43 +59,3 @@ function scoreWord(word) {
         return 0;
     }
 }
-
-function score(gameid, p) {
-    const gamesDB = firebase.database().ref("games").child(gameid);
-    gamesDB.once("value", gameSnap => {
-        let gameinfo = gameSnap.val();
-        let words = gameinfo.players[p]["words"];
-        let score = 0;
-        for (let i = 0; i < words.length; i++) {
-            score += scoreWord(words[i]);
-        }
-        gameinfo.players[p]["score"] = score;
-        gamesDB.set(gameinfo);
-    });
-};
-
-let doneTheStuff;
-function whatever(gameid) {
-    if (!doneTheStuff) {
-        doneTheStuff = true;
-        wordExists(gameid, "player1");
-        wordExists(gameid, "player2");
-        score(gameid, "player1");
-        score(gameid, "player2");
-    }
-}
-
-function populate(gameid) {
-    firebase.database().ref("games").child(gameid).once("value", gameSnap => {
-        game = gameSnap.val();
-        $("#score1").html(game.players.player1.score);
-        $("#words1").html(game.players.player1.words);
-        $("#score2").html(game.players.player2.score);
-        $("#words2").html(game.players.player2.words);
-    });
-}
-
-let url = new URL(window.location.href);
-let gameid = url.searchParams.get("gameid");
-whatever(gameid);
-populate(gameid);
