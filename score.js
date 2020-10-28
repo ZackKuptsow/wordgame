@@ -39,7 +39,7 @@ db.once("value", gameSnap => {
             // UPLOAD
             game.players[p]["words"] = correct;
             game.players[p]["score"] = score;
-            db.child("players").set(game);
+            db.set(game);
         });
     })
 })
