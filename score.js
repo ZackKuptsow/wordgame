@@ -19,14 +19,10 @@ let db = firebase.database().ref("games").child(gameid);
 db.on("value", gameSnap => {
     game = gameSnap.val();
 
-    ["player1", "player2"].forEach((p) => {
-        display.innerHTML = document.getElementById("scored").innerHTML;
+    display.innerHTML = document.getElementById("scored").innerHTML;
 
-        let guessed = game.players[p]["words"];
-        let number = p.slice(-1)
-        console.log(game);
-        console.log(game.players[p]);
-        $(`#score${number}`).html(game.players[p].game.score);
-        $(`#words${number}`).html(game.players[p].game.words.join(', '));
-    });
+    $("#score1").html(game.players.player1.game.score);
+    $("#words1").html(game.players.player1.game.words.join(', '));
+    $("#score2").html(game.players.player2.game.score);
+    $("#words2").html(game.players.player2.game.words.join(', '));
 });
