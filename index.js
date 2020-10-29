@@ -66,28 +66,6 @@ class LobbyGame {
         gameObj.status = this.status;
         return gameObj;
     }
-
-    // render() {
-    //     this.$html.html(`
-    //         <div class="lobbygame">
-    //             <h3 class="gid">${this.gameid}</h3>
-    //             <h4 class="status">${this.status}</h4>
-    //             <button class="join">Join</button>
-    //             <button class="edit">Edit</button>
-    //             <button id="getinfo">Info</button>
-    //             <p id="gameinfo">...</p>
-    //         </div>
-    //     `);
-    //     this.$html.find(".join").on("click", () => {
-    //         alert(`You clicked join for game-${this.gameid}`);
-    //     });
-    //     this.$html.find(".edit").on("click", () => {
-    //         let newId = prompt("What should the id be?");
-    //         this.gameid = newId || this.gameid;
-    //         this.render();
-    //         console.log(this.toJSON());
-    //     });
-    // }
 }
 
 $( "#genCode" ).click(function() {

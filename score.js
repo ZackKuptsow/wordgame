@@ -1,3 +1,5 @@
+display.innerHTML = document.getElementById("waiting").innerHTML;
+
 var firebaseConfig = {
     apiKey: "AIzaSyB4Q1_4syNWg1OvivZmm_wM-Ng5Ywxy6pQ",
     authDomain: "game-87e77.firebaseapp.com",
@@ -14,13 +16,16 @@ let url = new URL(window.location.href);
 let gameid = url.searchParams.get("gameid");
 
 let db = firebase.database().ref("games").child(gameid);
-db.once("value", gameSnap => {
+db.on("value", gameSnap => {
     game = gameSnap.val();
 
     ["player1", "player2"].forEach((p) => {
+        display.innerHTML = document.getElementById("scored").innerHTML;
+
         let guessed = game.players[p]["words"];
         let number = p.slice(-1)
-
+        console.log(game);
+        console.log(game.players[p]);
         $(`#score${number}`).html(game.players[p].game.score);
         $(`#words${number}`).html(game.players[p].game.words.join(', '));
     });

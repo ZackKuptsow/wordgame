@@ -48,9 +48,9 @@ exports.scoreGame = functions.database.ref('games/{gameId}/players/{player}/game
         let words = game.words;
         let score = game.score;
         let correct = [];
-        console.log("test1");
+        // console.log("test1");
         return admin.database().ref("dictionary").once("value").then(dSnap => {
-            console.log("test2")
+            // console.log("test2")
             let dict = dSnap.val();
             for(let i = 0; i < words.length; i++) {
                 if(Object.keys(dict).includes(words[i].toLowerCase())) {
@@ -58,7 +58,7 @@ exports.scoreGame = functions.database.ref('games/{gameId}/players/{player}/game
                 }
             };
 
-            console.log("test3")
+            // console.log("test3")
             // SCORING
             for(let i = 0; i < correct.length; i++) {
                 score += scoreWord(correct[i]);
