@@ -85,7 +85,7 @@ function score(guessed) {
     let gameid = url.searchParams.get("gameid");
     firebase.database().ref("games").child(gameid).once("value", gameSnap => {
         let finishedGame = gameSnap.val();
-        finishedGame.players.player2["words"] = guessed;
+        finishedGame.players.player2["game"] = {"score": 0, "words": guessed};
         firebase.database().ref("games").child(gameid).set(finishedGame);
     });
 }

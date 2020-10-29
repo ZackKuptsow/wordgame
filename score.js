@@ -18,44 +18,10 @@ db.once("value", gameSnap => {
     game = gameSnap.val();
 
     ["player1", "player2"].forEach((p) => {
-        // CHECK WORD LIST IF WORDS ARE IN ENGLISH DICTIONARY
         let guessed = game.players[p]["words"];
-        console.log(game);
-        let correct = [];
-        dictionary = firebase.database().ref("dictionary");
-        dictionary.once("value", dSnap => {
-            let dict = dSnap.val();
-            for(let i = 0; i < guessed.length; i++) {
-                if(Object.keys(dict).includes(guessed[i].toLowerCase())) {
-                    correct.push(guessed[i]);
-                }
-            };
-            // SCORING
-            let score = 0;
-            for(let i = 0; i < correct.length; i++) {
-                score += scoreWord(correct[i]);
-            }
+        let number = p.slice(-1)
 
-            // UPLOAD
-            game.players[p]["words"] = correct;
-            game.players[p]["score"] = score;
-            db.set(game);
-        });
-    })
-})
-
-function scoreWord(word) {
-    if (word.length > 8) {
-        return 11;
-    } else if (word.length === 7) {
-        return 4;
-    } else if (word.length === 6) {
-        return 3;
-    } else if (word.length === 5) {
-        return 2;
-    } else if (word.length === 4 || word.length === 3) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
+        $(`#score${number}`).html(game.players[p].game.score);
+        $(`#words${number}`).html(game.players[p].game.words.join(', '));
+    });
+});

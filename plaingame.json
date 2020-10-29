@@ -1,0 +1,18 @@
+{"ABC123": {
+   "created": "10/28/2020, 2:09:53 AM",
+   "gameboardstring": "NALATLOSTAARFELHKTSSTGHSM",
+   "maxplayers": 2,
+   "players": {
+       "player1": {
+           "ready": true,
+           "username": "plain",
+           "words": ["THEY", "CALL", "ME"]
+       },
+       "player2": {
+           "ready": true,
+           "username": "game",
+           "words": ["PLAIN", "GAME"]
+       }
+   }
+}
+}

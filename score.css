@@ -13,3 +13,8 @@ span {
     color: red;
     margin-left: 10px;
 }
+
+button {
+    display: block;
+    width: 20%;
+}
