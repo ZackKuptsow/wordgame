@@ -3,7 +3,9 @@ online versus boggle game for CISC670 - Web Application Security with Andy Novoc
 
 Unfinished
 TODO once I catch up on school work:
-  Adjacency rule
-  High score board with ability to play boards from that game to see if you can beat it
-  Clean up code
-  Document when finished
+  <ul>
+    <li>Adjacency rule</li>
+    <li>High score board with ability to play boards from that game to see if you can beat it</li>
+    <li>Clean up code</li>
+    <li>Document when finished</li>
+  </ul>
