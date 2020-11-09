@@ -1,5 +1,5 @@
 # wordgame
-<p>zackkuptsow.github.io/wordgame/</p>
+<p>https://zackkuptsow.github.io/wordgame/</p>
 online versus boggle game for CISC670 - Web Application Security with Andy Novocin (https://websec.prof.ninja/)
 
 Unfinished
